@@ -6,6 +6,7 @@ public class SnakeLadder {
 	static int endingPosition = 100; 
 	static int option;
 	static int number_on_dice;
+	static int position_of_player = 0;
 	
     public int playerRolls() {
     	System.out.println(" Player Rolls the Dice ");
@@ -15,35 +16,42 @@ public class SnakeLadder {
 	}
     
     public void play() {
-    	 number_on_dice=playerRolls();
+    	number_on_dice=playerRolls();
     	option = (int)(Math.random() * 10) % 3;
     	switch (option){	
     	case 0:
     	     System.out.println(" Ladder ");
-    	     startingPosition = startingPosition + number_on_dice;
-    	     System.out.println(" Player Move "+ number_on_dice );
+    	     int a = position_of_player;
+    	     position_of_player = position_of_player + number_on_dice;
+    	     if (position_of_player > 100){   //UC5
+	        	  position_of_player = a;
+	        	   break;
+	            }else {
+	            	System.out.println(" Ladder Position is "+  position_of_player);
+	            }     
     	  
     	     break;
     	    
     	case 1:     
     	     System.out.println(" Snake ");
-    	     startingPosition = startingPosition - number_on_dice;
-    	     if(startingPosition < 0)
-    	    	   {
-    	    		   startingPosition = 0;
-    	    	   } 
-    	     System.out.println(" Player Move behind "+ number_on_dice+ " steps"  );
+    	     position_of_player =  position_of_player - number_on_dice;
+	    	   if( position_of_player < 0)
+	    	   {
+	    		   position_of_player = 0;
+	    	   } 
+	    	 System.out.println(" Snake Position is "+  position_of_player);
 
     	     break;
     	
     	case 2:
-    		     if(startingPosition < 0)
-     	         {
-     		       startingPosition = 0;
-     	         } 
-     	            System.out.println(" No Move");
+    		 if( position_of_player < 0)
+	           {
+		            position_of_player = 0;
+	              } 
+	          System.out.println(" No position "+  position_of_player);
+	          break;
     		  
-    	    	}    	
+    	   	}    	
     }
 
 	public static void main(String[] args) {
@@ -52,7 +60,10 @@ public class SnakeLadder {
 		System.out.println("Welcome to Snake and Ladder Game");
 		System.out.println(" Player at Starting Position:"+ startingPosition);
 		System.out.println();
+		while ( position_of_player < endingPosition ) {
 		dice.play();
+		System.out.println();
+		}
 	}
 
 }
