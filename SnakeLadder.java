@@ -57,13 +57,16 @@ public class SnakeLadder {
 	public static void main(String[] args) {
 		
 		SnakeLadder dice = new SnakeLadder();
+		int no_of_times_dice = 0;
 		System.out.println("Welcome to Snake and Ladder Game");
 		System.out.println(" Player at Starting Position:"+ startingPosition);
 		System.out.println();
 		while ( position_of_player < endingPosition ) {
+		no_of_times_dice++; 
 		dice.play();
 		System.out.println();
 		}
+		System.out.println("No of times the dice was played to wins " + no_of_times_dice);
 	}
 
 }
